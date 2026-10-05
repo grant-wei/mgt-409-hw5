@@ -1,5 +1,7 @@
 # Problem 11 Package Review
 
+Current status, October 5, 2026: the public repository is published on `main` at `0e422f40c3d11d3e6ca8ae6e6b6fb8bf9b71409a`. The preparation report and manifest below describe the pre-publication snapshot. Their unpublished status and destination-availability statements are historical. Current known limitations are summarized in README.md. Canvas submission has not been performed as part of this work.
+
 ## Proposed Publication
 
 Destination: **https://github.com/grant-wei/mgt-409-hw5**. Proposed visibility: **public**. Proposed branch: **main**. The repository root would contain only this HW5 project, not the Life repository or other homework. Authentication is verified as `grant-wei`. Authenticated lookup returned 404, and the full owned-repository list does not contain this name. The destination is available at the time of checking, but no repository was created or published. Recheck immediately before creation and stop if it exists then.

@@ -1,8 +1,16 @@
 # Campus Customs HW5
 
+## Known Limitations
+
+The historical reset is unverified. Ticket 101 is simulated fulfillment, Ticket 102 is paid rent after an incomplete agent run, and Ticket 103 is price review only. No actual customer handoff or customer acceptance is established.
+
+Known workflow bugs remain: reset can reuse an already executed approval and block a new identical payment proposal, the dashboard has no ticket-completion path, and its latest-100-events display hides older agent contributions. Use the project-root backend command below. The assignment's backend-folder `main:app` command does not work with the current package imports. The standalone offline smoke helper also fails token preflight and is not exercised by the listed unittest command.
+
+All eleven problems have prompt entries, including Problem 6 later in the log. Four recovered prompts match saved user messages exactly. Some older entries contain punctuation changes, merged excerpts, or misplaced headings, so the whole log is not certified verbatim. The original prompt history is preserved.
+
 ## Setup From a Clean Clone
 
-Intended public repository: https://github.com/grant-wei/mgt-409-hw5. Publication and Canvas submission have not been performed. Only this homework project will appear at the repository root.
+Public repository: https://github.com/grant-wei/mgt-409-hw5. Published on `main` in commit `0e422f40c3d11d3e6ca8ae6e6b6fb8bf9b71409a`. Canvas submission has not been performed as part of this work.
 
 Use Python 3.14 and Node.js 22.12 or newer. Run from the cloned project root on Windows:
 
@@ -66,7 +74,7 @@ Alternatively, with the backend stopped, copy the original for an offline databa
 Copy-Item data\campus_customs.db data\campus_customs_new.db -Force
 ```
 
-Manual copying does not cancel pending approvals. Use the API reset for an app run with an existing queue. Never reuse stale approvals after manually replacing the database.
+Manual copying does not cancel pending approvals. API reset also retains executed approval records, which can block identical payment proposals in a later run. Neither method repairs the approval-reuse bug described above.
 
 ## Approval and Evidence
 
@@ -87,4 +95,4 @@ npm run build
 
 Tests use mocked provider responses, temporary databases, and temporary audit files. They do not establish successful live behavior. No paid smoke or ticket run is part of setup. `backend.smoke` makes paid requests and requires separate authorization.
 
-The manifest and verification results are in `output/problem11_checks.md`. Environment files, caches, dependency directories, logs, build output, and the local approval queue are excluded. Publication and Canvas submission still require approval.
+The manifest and verification results are in `output/problem11_checks.md`. Environment files, caches, dependency directories, logs, build output, and the local approval queue are excluded. Further publication changes and Canvas submission require approval.
