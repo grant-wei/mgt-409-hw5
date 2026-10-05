@@ -1,0 +1,40 @@
+{
+  "recovery_status": "4 of 4 exact user messages verified and appended",
+  "recovery_date": "2026-10-05",
+  "method": "parsed saved response_item user-message records, no paraphrasing or reconstruction",
+  "previous_public_package_sha256": "0ccc132de2573a462d8672483ba855f785b2d98471a4d2ded12783fabf084b3d",
+  "records": [
+    {
+      "text": "use CC-HOOD-NAVY hoodies, size M, for a separate simulation scenario.\n\nsimulate receipt of 12 hoodies on 2026-09-07, increasing the recorded stock from 8 to 20. label this as explicit simulation input, not verified supplier evidence.\n\nprepare and test the receipt workflow using a temporary database. show the exact changes for review before applying anything.\n\ndont substitute hoodies into ticket 101, change its requested item or mark it resolved. dont claim customer acceptance or fulfillment of ticket 103.\n\npreserve the original assignment records. no purchases, cash changes, reset, messages or paid model calls.",
+      "original_timestamp": "2026-10-05T15:54:53.868Z",
+      "source_record": "rollout-2026-10-03T23-24-07-01a104f0-bae3-7480-a107-f163036fd362.jsonl",
+      "source_line": 8623,
+      "text_sha256": "124f35e2e8ce77ac735a42684a765d92b6dc73bf73b42eb33f6d6e2c184d0a30",
+      "verified_role": "user"
+    },
+    {
+      "text": "add a durable MCP receipt workflow for the separate hoodie simulation.\n\nrecord SKU, size, received quantity, receipt date, previous and resulting stock, human approval, and a unique receipt reference. label the source explicitly as human-provided simulation input, not verified supplier evidence.\n\nthe receipt record and inventory increase must happen atomically. require exact human approval, prevent duplicate receipts, and add a read-only MCP tool to verify the saved record.\n\ntest receipt of 12 CC-HOOD-NAVY hoodies, size M, dated 2026-09-07, using a temporary database. verify stock changes from 8 to 20, the date and simulation label persist, and replaying the receipt cannot add stock again.\n\ncheck the receipt date against desk.date_today. show any simulated clock advance needed before applying this to the working database.\n\npreserve both project databases, cash, ticket statuses and production audit history. dont link this hoodie receipt to the white-tee invoice or resolve ticket 101.\n\nrun the relevant tests, update the tool documentation and show the exact proposed changes for approval. no working-database changes or paid calls yet.",
+      "original_timestamp": "2026-10-05T16:01:50.858Z",
+      "source_record": "rollout-2026-10-03T23-24-07-01a104f0-bae3-7480-a107-f163036fd362.jsonl",
+      "source_line": 8662,
+      "text_sha256": "1b24af9cbb780c6e0ff7684e87818c7e19b64e53c6804198cfddf099f0b2ffdc",
+      "verified_role": "user"
+    },
+    {
+      "text": "i approve the exact simulated clock advance and hoodie receipt you previewed.\n\nadvance desk.date_today from 2026-08-31 to 2026-09-07. record receipt of 12 CC-HOOD-NAVY hoodies, size M, dated 2026-09-07, increasing stock from 8 to 20.\n\nuse receipt reference SIM-CC-HOOD-NAVY-M-2026-09-07-12, approved_by G, and approval reference human-approval:hoodie-receipt-SIM-CC-HOOD-NAVY-M-2026-09-07-12. preserve the source label “human-provided simulation input, not verified supplier evidence.”\n\napply through MCP and the exact human-approval guard. if current values differ from the preview, stop and report the mismatch.\n\nverify the saved receipt, simulation date, stock of 20 and unchanged $160 checking. preserve the original database and append the actual simulation event to the audit.\n\nleave ticket 101 open and ticket 103 resolved for price review only. dont infer tee delivery from elapsed time or claim customer acceptance or hoodie fulfillment. no reset, purchases, messages or paid model calls.",
+      "original_timestamp": "2026-10-05T16:26:49.380Z",
+      "source_record": "rollout-2026-10-03T23-24-07-01a104f0-bae3-7480-a107-f163036fd362.jsonl",
+      "source_line": 8869,
+      "text_sha256": "32bdf527e17b4402434189784b2af846142e4da292359ce02e9a66ef8397598c",
+      "verified_role": "user"
+    },
+    {
+      "text": "hw5 problem 9 followup check what’s still missing against HW5_ASSIGNMENT.md. look at the dashboard, audit history, working db, and output files. did the three-ticket run start from a reset, and do we have the actual agent work, cash math, and screenshots?",
+      "original_timestamp": "2026-10-05T17:06:01.634Z",
+      "source_record": "rollout-2026-10-03T23-24-07-01a104f0-bae3-7480-a107-f163036fd362.jsonl",
+      "source_line": 9033,
+      "text_sha256": "72e39ca9ac3fa3046c49d80b51d0a4449f7e3f6ac43787164cfb458bd0c945ec",
+      "verified_role": "user"
+    }
+  ]
+}

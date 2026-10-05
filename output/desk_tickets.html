@@ -1,0 +1,280 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Campus Customs ticket plans for MGT 409 Homework 5, Problem 6">
+  <title>Campus Customs | Problem 10 Reflection</title>
+  <style>
+    :root {
+      color-scheme: light;
+      --ink: #0a1a2f;
+      --muted: #526170;
+      --line: #ced8e2;
+      --paper: #f4f7fa;
+      --card: #fff;
+      --navy: #071b35;
+      --green: #00a67d;
+      --green-soft: #dff7ef;
+      --gold: #d6ae62;
+      --radius: 18px;
+      --shadow: 0 18px 48px rgba(7, 27, 53, 0.09);
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      color: var(--ink);
+      background: radial-gradient(circle at 90% 0%, rgba(0, 166, 125, 0.1), transparent 24rem), var(--paper);
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      font-size: 16px;
+      line-height: 1.6;
+    }
+
+    .shell { width: min(1080px, calc(100% - 32px)); margin: 0 auto; padding: 28px 0 56px; }
+
+    .masthead {
+      position: relative;
+      overflow: hidden;
+      padding: clamp(24px, 5vw, 42px);
+      border-radius: 24px;
+      color: #fff;
+      background: var(--navy);
+      box-shadow: var(--shadow);
+    }
+
+    .masthead::after {
+      content: "";
+      position: absolute;
+      width: 250px;
+      height: 250px;
+      right: -100px;
+      top: -130px;
+      border: 38px solid rgba(0, 166, 125, 0.28);
+      border-radius: 50%;
+      pointer-events: none;
+    }
+
+    .eyebrow {
+      position: relative;
+      z-index: 1;
+      margin: 0 0 8px;
+      color: #8ee7cf;
+      font-size: 0.76rem;
+      font-weight: 800;
+      letter-spacing: 0.13em;
+      text-transform: uppercase;
+    }
+
+    h1 {
+      position: relative;
+      z-index: 1;
+      max-width: 700px;
+      margin: 0;
+      font-family: Georgia, "Times New Roman", serif;
+      font-size: clamp(2.35rem, 6vw, 4.3rem);
+      font-weight: 500;
+      letter-spacing: -0.045em;
+      line-height: 1.02;
+    }
+
+    .lede { position: relative; z-index: 1; max-width: 680px; margin: 16px 0 0; color: #d9e4ef; }
+
+    .desk-bar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      margin: 30px 0 12px;
+    }
+
+    .desk-bar h2 { margin: 0; font-size: 1.15rem; letter-spacing: -0.02em; }
+    .desk-bar p { margin: 0; color: var(--muted); font-size: 0.88rem; }
+
+    .tabs {
+      display: flex;
+      gap: 8px;
+      overflow-x: auto;
+      padding: 5px 2px 12px;
+      scrollbar-width: thin;
+    }
+
+    .tab {
+      flex: 0 0 auto;
+      min-height: 46px;
+      padding: 10px 16px;
+      border: 1px solid var(--line);
+      border-radius: 999px;
+      color: #344354;
+      background: rgba(255, 255, 255, 0.76);
+      font: inherit;
+      font-size: 0.92rem;
+      font-weight: 700;
+      cursor: pointer;
+      transition: color 140ms ease, background 140ms ease, border-color 140ms ease, transform 140ms ease;
+    }
+
+    .tab:hover { transform: translateY(-1px); border-color: #9baebe; }
+    .tab[aria-selected="true"] { color: #fff; border-color: var(--navy); background: var(--navy); box-shadow: 0 6px 16px rgba(7, 27, 53, 0.16); }
+    .tab:focus-visible { outline: 3px solid var(--gold); outline-offset: 3px; }
+
+    .panel {
+      min-height: 430px;
+      padding: clamp(22px, 4vw, 34px);
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      background: var(--card);
+      box-shadow: 0 8px 28px rgba(7, 27, 53, 0.045);
+    }
+
+    .ticket-head {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: 18px;
+      padding-bottom: 20px;
+      border-bottom: 1px solid #e5ebf0;
+    }
+
+    .ticket-number { margin: 0 0 4px; color: #087b63; font-size: 0.78rem; font-weight: 800; letter-spacing: 0.11em; text-transform: uppercase; }
+    h3 { margin: 0; font-size: clamp(1.3rem, 3vw, 1.7rem); letter-spacing: -0.035em; line-height: 1.2; }
+    .open-state { flex: 0 0 auto; padding: 5px 10px; border-radius: 999px; color: #79540b; background: #fbf2db; font-size: 0.76rem; font-weight: 800; letter-spacing: 0.04em; text-transform: uppercase; }
+
+    .section-label { margin: 25px 0 9px; color: var(--muted); font-size: 0.75rem; font-weight: 800; letter-spacing: 0.12em; text-transform: uppercase; }
+    .expected-copy { max-width: 890px; margin: 0; color: #25374a; font-size: 1.02rem; }
+    code { padding: 0.08em 0.35em; border-radius: 5px; color: #075a4a; background: #edf7f4; font-family: ui-monospace, SFMono-Regular, Consolas, monospace; font-size: 0.88em; overflow-wrap: anywhere; }
+    .actual-space { min-height: 74px; }
+
+    .footer { margin: 14px 2px 0; color: var(--muted); font-size: 0.82rem; }
+
+    @media (max-width: 620px) {
+      .shell { width: min(100% - 20px, 1080px); padding-top: 10px; }
+      .masthead { border-radius: 18px; }
+      .desk-bar { align-items: flex-start; flex-direction: column; }
+      .panel { min-height: 390px; }
+      .ticket-head { align-items: flex-start; flex-direction: column; }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after { scroll-behavior: auto !important; transition-duration: 0.01ms !important; }
+    }
+  </style>
+</head>
+<body>
+  <main class="shell">
+    <header class="masthead">
+      <p class="eyebrow">Campus Customs ? Problem 10</p>
+      <h1>Three tickets.<br>Evidence for review.</h1>
+      <p class="lede">Expected plans, actual runs, approvals, and cash records from Problem 9. The Reflection tab evaluates the recorded work and outcomes.</p>
+    </header>
+
+    <div class="desk-bar">
+      <h2>Problem 9 outcomes</h2>
+      <p>Three tickets resolved ? Reflection completed</p>
+    </div>
+
+    <div class="tabs" role="tablist" aria-label="Ticket and reflection tabs">
+      <button class="tab" id="tab-101" type="button" role="tab" aria-selected="true" aria-controls="panel-101" tabindex="0">101 · Tee order</button>
+      <button class="tab" id="tab-102" type="button" role="tab" aria-selected="false" aria-controls="panel-102" tabindex="-1">102 · Rent</button>
+      <button class="tab" id="tab-103" type="button" role="tab" aria-selected="false" aria-controls="panel-103" tabindex="-1">103 · Hoodie discount</button>
+      <button class="tab" id="tab-cash" type="button" role="tab" aria-selected="false" aria-controls="panel-cash" tabindex="-1">Cash</button>
+      <button class="tab" id="tab-reflection" type="button" role="tab" aria-selected="false" aria-controls="panel-reflection" tabindex="-1">Reflection</button>
+    </div>
+
+    <section class="panel" id="panel-101" role="tabpanel" aria-labelledby="tab-101" tabindex="0">
+      <header class="ticket-head">
+        <div><p class="ticket-number">Ticket 101 · Customer order</p><h3>Bulldog tee, size S</h3></div>
+        <span class="open-state">Resolved</span>
+      </header>
+      <p class="section-label">Expected</p>
+      <p class="expected-copy">Boss should read <code>get_ticket_context(101)</code> and delegate to Inventory first because there is no CC-TEE-WHITE in size S on hand. Inventory checks <code>get_product_snapshot</code> and the linked <code>get_invoice_details(501)</code>, then asks Accounting to verify the $840 open invoice and checking balance with <code>get_invoice_details(501)</code> and <code>get_cash_snapshot()</code>. Boss asks Facilities to check the rent timing with <code>get_rent_context(1)</code>. If the invoice is approved and paid first, cash falls from $3,400 to $2,560. Paying the $2,400 rent next would leave $160 for ticket 103. Only exact human approval permits <code>record_invoice_payment(501, "checking", 840.00, ...)</code>. Accounting then verifies the invoice and balance with <code>get_invoice_details(501)</code> and <code>get_cash_snapshot()</code>. Paying the invoice only removes the recorded unpaid-invoice shipping block. It does not prove the vendor shipped the reprint. Inventory should use <code>set_inventory_quantity</code> only after delivery is confirmed and that exact stock update is approved, then verify with <code>get_product_snapshot</code>. Customer Service may prepare a draft from verified facts, but it must not promise availability or a delivery date. A proposed reply or invoice payment alone does not fulfill the order or establish that the ticket is resolved.</p>
+      <p class="section-label">Actual</p>
+      <div class="actual-space" aria-label="Recorded actual results"><p>Boss delegated to Inventory and Accounting. Inventory verified zero CC-TEE-WHITE size S, and Accounting verified invoice 501 is open and overdue for $840, with checking at $3,400. No purchase or payment proposal was recorded because a supplier quote is missing and the invoice?s connection to fulfillment is not established. The ticket remains open and unfulfilled. No delivery was recorded. The audit shows 8 model requests, 3 agent invocations and 8 MCP calls. Input and output token totals were not retained by the API or audit history.</p><p><strong>Live retry attempt (run ad906887-0226-4d62-8248-65a8960ecbb7, 2026-10-04): Failed with UsageLimitExceeded before Accounting or Customer Service completed. Boss delegated to Inventory, which made 3 MCP reads: ticket context, product snapshot and vendor details. No payment or purchase proposal was produced, no approval is pending, no draft was returned and no delivery was recorded. Actual usage reconciled from the two agent failure records: 4 provider requests, 5,518 input tokens, 132 output tokens. Ticket remains open.</p><p><strong>Status verified, 2026-10-05:</strong> Ticket remains open pending the reprint. Invoice 501 is paid, but the database records no shipment or receipt. No stock was changed, and no delivery is claimed.</p><p><strong>Final evidence, 2026-10-05:</strong> Live run <code>32644692-4fc7-4376-8b8f-6e5f925d77f8</code> ended with <code>AGENT_EXECUTION_FAILED</code> after Inventory and Accounting returned validated AgentReply results. Accounting?s exact $840 invoice proposal was recovered from that incomplete run and then executed once after human approval. Approval record <code>89b5d769-9dce-4aaf-a1ef-03516d509432</code> confirms invoice 501 paid from checking. Separately, receipt <code>SIM-CC-TEE-WHITE-S-2026-09-07-01</code> records one tee from ?human-provided simulation input, not verified supplier evidence,? stock 0 ? 1. The separately approved simulated fulfillment adjustment moved stock 1 ? 0, and a separate human approval resolved Ticket 101. Outcome: simulated fulfillment only. No actual customer handoff is recorded.</p></div>
+    </section>
+
+    <section class="panel" id="panel-102" role="tabpanel" aria-labelledby="tab-102" tabindex="0" hidden>
+      <header class="ticket-head">
+        <div><p class="ticket-number">Ticket 102 · Rent notice</p><h3>Chapel Street shop rent</h3></div>
+        <span class="open-state">Resolved</span>
+      </header>
+      <p class="section-label">Expected</p>
+      <p class="expected-copy">Boss should read <code>get_ticket_context(102)</code> and delegate to Facilities first because this ticket concerns the lease and rent. Facilities verifies the $2,400 due date and shop date with <code>get_rent_context(1)</code>, then asks Accounting to check shared cash with <code>get_cash_snapshot()</code>. If ticket 101?s $840 invoice payment has already been made, checking has $2,560. With exact human approval for the lease, checking account, and $2,400 payment, Accounting can call <code>record_rent_payment(1, "checking", 2400.00, ...)</code>. That leaves $160 after the invoice and rent outflows. Accounting verifies the rent record and balance with <code>get_rent_payment_details(1)</code> and <code>get_cash_snapshot()</code>. A verified payment means the rent payment was recorded. It does not contact the landlord, change the lease?s next due date, or by itself establish that ticket 102 is resolved. Boss should use <code>update_ticket_status(102, "resolved", ...)</code> only with separate exact human approval and evidence that the ticket request is handled.</p>
+      <p class="section-label">Actual</p>
+      <div class="actual-space" aria-label="Recorded actual results"><p>Boss delegated to Facilities. Facilities verified $2,400 rent for the Chapel Street shop is due 2026-09-02, two days after the recorded shop date, with no rent payment recorded. Checking was $3,400. No payment proposal or landlord contact was recorded. Ticket remains open. The audit shows 6 model requests, 2 agent invocations and 5 MCP calls. Input and output token totals were not retained by the API or audit history.</p><p><strong>Live retry attempt (run 68d1c3e9-2847-467f-bbe8-2ac9428e8689, 2026-10-04): Failed with PermissionError while Boss attempted to delegate to Facilities. Facilities made no model request. The exact underlying message is not retained, so the cause remains unverified. Boss used 2 provider requests, 2,720 input tokens and 116 output tokens, with 1 MCP read. No rent proposal or approval is pending, no payment was recorded and the ticket remains open.</p><p><strong>Live ticket 102 attempt (run 4e0628a8-9d0b-4a24-bbad-e3ce9ac27f41, 2026-10-04):</strong> Boss delegated to Facilities, which involved Accounting. Facilities and Accounting completed work, then the parent run failed with <code>AGENT_INPUT_OR_USAGE_LIMIT_EXCEEDED</code> at <code>usage.py:check_before_request:553</code>. Actual provider usage: 6 requests, 7,509 input tokens and 653 output tokens. The configured 5,000-token ceiling was shared across the run, not per invocation as the approved preview described, and the failure surfaced after usage crossed it. Accounting?s exact $2,400 rent proposal was preserved from the incomplete run and is pending human review once, request <code>43e294f2-9f0c-48d6-ab2a-b5b30668a3a6</code>. Current checking remains $2,560. No rent payment or ticket-status change occurred. Ticket 102 remains open.</p><p><strong>Subsequent verified result, 2026-10-05:</strong> Approval record 43e294f2-9f0c-48d6-ab2a-b5b30668a3a6 is executed. MCP confirms rent payment record 1 for lease 1, $2,400 from checking, paid 2026-08-31 for the 2026-09-02 due date, approved by G. Checking is $160. This payment does not by itself establish ticket resolution.</p><p><strong>Status verified, 2026-10-05:</strong> Ticket resolved with human approval after MCP confirmed the $2,400 checking rent payment. The notice asked for rent due in two days, and the payment record confirms that obligation was handled. No landlord contact is claimed.</p><p><strong>Final evidence, 2026-10-05:</strong> Live run <code>4e0628a8-9d0b-4a24-bbad-e3ce9ac27f41</code> failed with <code>AGENT_INPUT_OR_USAGE_LIMIT_EXCEEDED</code> after Facilities failed and Accounting returned a validated exact $2,400 rent proposal. The proposal came from an incomplete run and was later approved and executed once under request <code>43e294f2-9f0c-48d6-ab2a-b5b30668a3a6</code>. MCP confirms payment for lease 1, due 2026-09-02, paid 2026-08-31 from checking by G. Separate human status approval <code>human-approval:problem9-final-ticket-102</code> resolved the ticket. No landlord contact occurred.</p></div>
+    </section>
+
+    <section class="panel" id="panel-103" role="tabpanel" aria-labelledby="tab-103" tabindex="0" hidden>
+      <header class="ticket-head">
+        <div><p class="ticket-number">Ticket 103 · Price override</p><h3>Bulk navy hoodies</h3></div>
+        <span class="open-state">Resolved</span>
+      </header>
+      <p class="section-label">Expected</p>
+      <p class="expected-copy">Boss should read <code>get_ticket_context(103)</code> and delegate to Inventory first because only 8 of the requested 20 CC-HOOD-NAVY hoodies in size M are in stock. Inventory checks <code>get_product_snapshot</code> and available vendor facts with <code>get_vendor_details(vendor_id)</code>, without inferring a supplier relationship for this SKU. Accounting uses the recorded $22 unit cost and $58 list price from <code>get_product_snapshot</code> to recommend a 10% bulk discount for human review. That is $5.80 off per hoodie, for a proposed price of $52.20 and a $30.20 gross margin per hoodie, or about 57.9%, using the database cost as an internal cost basis. The $22 value is not a supplier quote. After the $840 invoice and $2,400 rent payments in the proposed sequence, only $160 remains. A hypothetical $264 purchase of the 12-unit shortage at the recorded $22 cost would exceed that balance, so it cannot be recorded with <code>record_purchase_order</code> under the current cash position. The database also does not confirm a supplier or quote for this hoodie. Customer Service may draft a response for review that presents the discount as a recommendation, not an approved offer or accepted deal. That draft does not mean the ticket is handled or the order fulfilled. Any later approved purchase would need verified supplier and quote information, sufficient cash, and exact human approval, then <code>get_purchase_details(103)</code> to verify its ordered status. An ordered purchase would still not prove delivery or change inventory.</p>
+      <p class="section-label">Actual</p>
+      <div class="actual-space" aria-label="Recorded actual results"><p>Boss delegated to Inventory. The request is for 20 CC-HOOD-NAVY hoodies, size M. Inventory found 8 recorded on hand, a shortfall of 12. No purchase was proposed because a selected vendor, supplier quote and quote reference are missing. The $22 recorded cost is not a supplier quote. The discount remains undecided, with no customer reply or commitment recorded. No order or delivery occurred. Ticket remains open. The audit shows 6 model requests, 2 agent invocations and 3 MCP calls. Input and output token totals were not retained by the API or audit history.</p><p><strong>Live retry attempt (run 09679dda-6d33-44c1-8214-dbfd179de938, 2026-10-04): Failed with ValueError before any MCP call or specialist completion. Boss used 1 provider request, 1,300 input tokens and 42 output tokens. No discount recommendation, customer draft, payment or purchase proposal was returned. No approval is pending and the ticket remains open. The exact cause is not established by the safe failure log.</p><p><strong>Live attempt (run 746ce5f7-f347-4c1f-9822-b808acc55bb2, 2026-10-05):</strong> Started once through the dashboard with direct OpenAI gpt-6-luna, reasoning effort none. Inventory completed a read-only check: 8 CC-HOOD-NAVY hoodies, size M, are recorded on hand for a request of 20, leaving a shortage of 12. No inventory update or purchase occurred. Accounting completed a read-only recommendation: 10% off the recorded $58 list price is $52.20 per hoodie, $1,044 for 20. Using the $22 recorded internal unit cost, estimated gross margin is $30.20 per hoodie, $604 total, about 57.9%. This is for review only, not approved or accepted, and $22 is not a supplier quote. Boss then failed with AGENT_INPUT_OR_USAGE_LIMIT_EXCEEDED at usage.py:check_before_request:553 when a request would have exceeded the 5,000 input-token per-invocation limit (observed 6,099). Accounting?s validated result is retained in the audit. Customer Service was not delegated, so no customer draft was produced. Usage: 6 provider requests, 7,610 input tokens, 591 output tokens, and 4 tool/MCP calls across 2 completed specialist invocations plus Boss. No action is pending. Ticket remains open and checking remains $160. No payment, purchase, inventory update, or status change occurred.</p><p><strong>Live attempt (run 78216031-bb8b-4d9c-be16-ad65855fb42c, 2026-10-05):</strong> Completed once through the dashboard with direct OpenAI gpt-6-luna and reasoning effort none. Boss returned a validated AgentReply after Inventory, Accounting, and Customer Service completed. Inventory verified 8 CC-HOOD-NAVY hoodies, size M, on hand against 20 requested, a shortage of 12. No vendor or supplier quote was verified, and no delivery or lead time is established. Accounting recommends a 10% discount for review: $52.20 each, $1,044 for 20. Using the $22 internal recorded unit cost (not a supplier quote), estimated gross margin is $30.20 per unit, about 57.9%, or $604 total before other expenses. This discount is a recommendation only, not approved or accepted. Customer Service draft, not sent: ?Thanks for your interest in 20 CC-HOOD-NAVY hoodies in size M. We currently have 8 on hand, so 12 are not currently available. If you?re interested in proceeding with 20, a 10% discount has been recommended, which would bring the price to $52.20 each ($1,044 total). Please let us know how you?d like to proceed.? No purchase, payment, inventory update, customer communication, or ticket-status change occurred. No approval is pending. Checking remains $160 and Ticket 103 remains open. Usage: 9 provider requests, 4 agent invocations, 6 reported tool calls, 12,878 input tokens, and 1,343 output tokens. Per-agent input/output: Inventory 3,810/263, Accounting 1,186/289, Customer Service 1,145/185, Boss 6,737/606.</p><p><strong>Status verified, 2026-10-05:</strong> Ticket resolved for the price-review request only. The human approved the 10% price recommendation and existing board draft. This records no customer acceptance, sale, restock, or fulfillment of the 20 hoodies.</p><p><strong>Final evidence, 2026-10-05:</strong> Live run <code>78216031-bb8b-4d9c-be16-ad65855fb42c</code> completed with a validated Boss AgentReply after Inventory verified 8 on hand against 20 requested, Accounting recommended 10% off ($52.20 each, $1,044 total; indicative $604 gross margin using internal cost), and Customer Service prepared a board draft. The user approved the price recommendation and existing draft for price review only. Status approval <code>human-approval:problem9-final-ticket-103</code> resolved only that review request. No customer acceptance, sale, or hoodie fulfillment is established. The later 12-hoodie receipt was a separate simulation, not supplier evidence and not Ticket 103 fulfillment.</p></div>
+    </section>
+
+    <section class="panel" id="panel-cash" role="tabpanel" aria-labelledby="tab-cash" tabindex="0" aria-label="Cash tab" hidden><header class="ticket-head"><div><p class="ticket-number">Cash ? Checking account</p><h3>Actual cash position</h3></div><span class="open-state">2 outflows verified</span></header><p class="section-label">Actual</p><p class="expected-copy">Working database reset once before this live sequence. Starting checking: $3,400.00. Current checking verified through the API and working database: $3,400.00. Change: $0.00. No payments, purchases or status changes were approved or recorded. Invoice 501 remains open and unpaid, rent due 2026-09-02 remains unpaid, and no purchase order was recorded. All three tickets remain open with no pending approvals. This retry used 7 provider requests, 9,538 input tokens and 290 output tokens across the three actual runs. Earlier attempt results remain above in each ticket Actual panel.</p><p class="expected-copy">Verified update, 2026-10-04: approval request 89b5d769-9dce-4aaf-a1ef-03516d509432 is executed. MCP confirms invoice 501 (Bulldog Print Co) is paid, $840 from checking, recorded 2026-08-31, approval reference human-approval:89b5d769-9dce-4aaf-a1ef-03516d509432. Its payment ledger contains one row. Checking balance is $2,560. The $840 payment is already reflected in that balance and was not repeated. Ticket 101 remains open. This payment provides no delivery evidence.</p><p class="expected-copy">Verified update, 2026-10-05: Rent request 43e294f2-9f0c-48d6-ab2a-b5b30668a3a6 is executed. MCP confirms one $2,400 checking rent payment, record 1, for lease 1, paid 2026-08-31 against the 2026-09-02 due date, approved by G. Together with the one $840 invoice payment, recorded checking outflows total $3,240. Current checking is $160 as of 2026-08-31. Ticket 102 remains open unless separately verified and approved as resolved.</p><p><strong>Final reconciliation (MCP-verified, 2026-10-05):</strong> Starting checking after the authorized reset: $3,400.00. Ticket 101 invoice 501 payment record 1: ?$840.00 from checking, paid 2026-08-31. Ticket 102 rent payment record 1: ?$2,400.00 from checking, paid 2026-08-31 for the 2026-09-02 due date. Total recorded outflows: $3,240.00. No purchase or sales revenue was recorded. Ending checking: $160.00, matching the current MCP cash snapshot. No Ticket 103 cash change occurred. This reconciliation supersedes the earlier pre-approval cash snapshot above, which is retained as history.</p><p class="expected-copy"><strong>Final status and reset evidence:</strong> MCP confirms Tickets 101, 102, and 103 are resolved. Checking reconciles as $3,400 ? $840 ? $2,400 = $160, matching the current MCP cash snapshot. The audit has no explicit database-reset event, so whether the three-ticket sequence began with a reset is inconclusive. The observed $3,400 early balance does not prove a reset occurred. Ticket 101 is simulated fulfillment only, with no actual customer handoff. Ticket 103 is price review only, with no customer acceptance or fulfillment.</p></section>
+    <section class="panel" id="panel-reflection" role="tabpanel" aria-labelledby="tab-reflection" tabindex="0" aria-label="Problem 10 reflection" hidden>
+      <header class="ticket-head"><div><p class="ticket-number">Problem 10</p><h3>Reflection</h3></div><span class="open-state">Completed</span></header>
+      <p class="section-label">Overall Experience</p>
+      <p>Overall, it kind of felt like a used-car salesman, lol. It kept asking me for things I did not think it needed to ask for. I wanted a recommendation and help finishing the job, rather than having to keep figuring out the next step myself. The specialists did useful partial work, but I am still not sure whether that saved me time overall. The final resolved statuses also do not mean that all three agent runs succeeded. Failed runs, later human approvals, and simulated fulfillment need to be evaluated separately.</p>
+      <p class="section-label">Ticket 101: Useful Partial Work, Incomplete Coordination</p>
+      <p>I expected Boss to start with Inventory, bring in Accounting for the overdue invoice and shared cash, check rent timing with Facilities, and use Customer Service for a truthful reply. Inventory and Accounting did check the important facts: CC-TEE-WHITE, size S, had zero stock, and invoice 501 was an overdue $840 obligation. Accounting produced an exact payment proposal. However, Boss failed before returning a validated final result, and the expected Facilities check and Customer Service draft did not complete in that run. The audit records AGENT_EXECUTION_FAILED, but the available safe logs do not establish the specific underlying cause. I would not guess why it failed.</p>
+      <p>The invoice proposal was recovered from Accounting&#x27;s completed structured result and later paid once after my approval. That is useful work, but it was not a completed customer-order workflow. I wanted the system to suggest how to finish after Boss failed. The ticket was eventually resolved through separately approved simulation steps using the simulated date 2026-09-07: receipt of one tee changed stock from 0 to 1, and a simulated fulfillment adjustment changed it from 1 to 0. The source was explicitly human-provided simulation input, not verified supplier evidence. Paying invoice 501 did not prove shipment or delivery, and the simulation does not mean the customer actually got the item. Actual therefore differed from Expected: the specialists checked facts and prepared a payment, while later human-approved simulation actions finished the recorded outcome.</p>
+      <p class="section-label">Ticket 102: Correct Proposal, Failed Parent Run</p>
+      <p>I expected Facilities to verify the lease and rent date, involve Accounting to check cash and prepare the payment, then verify the approved result. That sequence produced the actionable part: Accounting proposed $2,400 from checking for lease 1, due 2026-09-02. With $2,560 after the invoice payment, rent would leave $160. Accounting returned a validated proposal, but Facilities and Boss did not return completed replies because the parent workflow hit the input-token usage limit. At that time, the 5,000-token limit was being shared across the team instead of applied per invocation as described. The recorded team input was 7,509 tokens. The proposal survived the incomplete run and was approved, executed, and verified later. A separate human-approved status change resolved the rent-notice request.</p>
+      <p>I thought it should just wait for tokens to refresh and keep going on its own. That was my expectation, not a feature the app supported. This limit was a cumulative run budget, not a time-based provider allowance. Waiting would not replenish it, and the backend did not automatically resume failed runs. A fresh approved run or resume would make additional model requests. The payment preparation matched Expected, but the agent loop did not finish the verification and closure on its own.</p>
+      <p class="section-label">Ticket 103: Completed Price Review, Not a Completed Order</p>
+      <p>The final successful run followed the plan more closely: Inventory checked availability, Accounting recommended a specific discount with margins, Customer Service drafted a reply, and Boss returned a validated result. Inventory found 8 navy hoodies in size M against a request for 20, leaving a shortage of 12. Accounting recommended 10% off the $58 list price, or $52.20 each and $1,044 for 20. Using the recorded $22 internal cost, the indicative gross margin was $30.20 per hoodie, $604 total, or about 57.9% before other expenses. That internal cost was not a supplier quote. Customer Service&#x27;s board draft explained the shortage and presented the discount as a recommendation without promising delivery.</p>
+      <p>I wanted it to auto-close once the review was done. The records show that it did not: the model run left the status unchanged, and a later exact human-approved status update closed the price-review request after I approved the proposed price and existing draft. That is separate from customer acceptance, a sale, or fulfillment of 20 hoodies. An earlier failed attempt completed Inventory and Accounting but did not reach Customer Service, so that partial attempt should not be confused with the successful run. The later receipt of 12 hoodies was a separate human-provided simulation, not supplier evidence or proof that ticket 103 was fulfilled.</p>
+      <p class="section-label">Cash and Reset Evidence</p>
+      <p>Cash reconciled correctly: $3,400 minus the $840 invoice payment minus $2,400 rent equals $160, matching the verified checking records. Ticket 103&#x27;s price review and the simulation receipts did not change cash. The tickets shared one account, so a hypothetical $264 purchase of 12 hoodies at the recorded $22 cost would exceed the remaining $160 even before resolving the missing supplier quote. I still cannot tell whether the required reset happened. The audit has no explicit reset event. An early $3,400 balance supports the starting cash calculation, but it does not prove a reset.</p>
+      <p class="section-label">Five Agents Versus One Agent With Tools</p>
+      <p>I would stick with five agents. The specialists got parts of the work done even when the whole workflow did not finish, especially Accounting&#x27;s recoverable invoice and rent proposals. However, I do not know whether five agents were faster or better than one agent with tools because we did not compare them.</p>
+      <p>One agent could potentially simplify the handoffs by reading the same ticket, stock, invoice, lease, and cash tools, then producing one structured recommendation, payment proposal, and board draft. That might reduce repeated context and the need for Boss to collect specialist replies after useful work was already done. This is a possible simplification, not a tested result. It would still need exact human approval for writes and would still have to distinguish simulated stock movements from actual delivery.</p>
+      <p class="section-label">Three New Problems the Existing Tools Could Help With</p>
+      <p>These examples came up during brainstorming, and I picked them. First, the team could flag low stock and make a reorder list for specified SKU-size pairs. Inventory can use get_product_snapshot and compare quantities with a human-provided reorder cutoff. The tee and hoodie shortages show why these checks matter. Checking the whole shop automatically would need an inventory-list tool and stored thresholds. The current purchase tool can record an exactly approved order when valid supplier and quote details are supplied, but obtaining those details automatically would need supplier access. A reorder list is not an order or delivered stock.</p>
+      <p>Second, Customer Service could draft order-status updates from get_ticket_context, get_product_snapshot, and the invoice or purchase records. Ticket 103 shows the kind of grounded board draft it can produce. It must say when shipment or handoff information is missing. Sending updates would need a messaging tool and authorization, and the current assignment keeps messages as drafts on the board.</p>
+      <p>Third, Accounting could flag upcoming supplier bills for known invoice IDs and prepare payments for review using get_invoice_details, get_invoice_payment_details, and get_cash_snapshot. The rent-context tool also supplies the simulated shop date for judging dates. Invoice 501 shows that the team can identify an overdue obligation and produce an exact payment proposal. Automatic reminders across all bills would additionally need an invoice-list or due-date search tool and a scheduler. Human approval would still be required for payment.</p>
+      <p class="section-label">Three Problems the Current Tools Could Not Fully Solve</p>
+      <p>First, the team could not spot damaged merchandise on a shelf. The inventory tools report recorded quantities and prices, not physical condition. It would need a person to inspect the items or a camera system that could reliably detect damage, plus a tool to record inspection results. Inventory or a quality-control agent could coordinate that work, but an extra agent alone would not provide the missing evidence.</p>
+      <p>Second, it could not actually hand an item to a customer. That needs a worker or delivery service and a reliable handoff or delivery-confirmation record. A fulfillment agent could coordinate those steps. Ticket 101 makes the distinction clear: recording stock 0 to 1 to 0 and resolving simulated fulfillment is not the same as delivering the tee.</p>
+      <p>Third, it could not figure out where a missing package went. It would need carrier tracking, a tracking reference tied to the order, and possibly someone to investigate or open a claim. A logistics agent could use those additional tools. The existing vendor and receipt records do not locate a package, and the simulated receipts do not prove a supplier shipped anything. More agents could help coordinate these problems, but they would still need the tools or people that the current app lacks.</p>
+    </section>
+
+    <p class="footer">The original assignment database is preserved. The working database contains the verified approved payments, status updates, and separately labeled simulations documented above.</p>
+  </main>
+
+  <script>
+    (() => {
+      const tabs = Array.from(document.querySelectorAll('[role="tab"]'));
+
+      function activateTab(nextTab, moveFocus = false) {
+        for (const tab of tabs) {
+          const selected = tab === nextTab;
+          tab.setAttribute('aria-selected', String(selected));
+          tab.tabIndex = selected ? 0 : -1;
+          document.getElementById(tab.getAttribute('aria-controls')).hidden = !selected;
+        }
+        if (moveFocus) nextTab.focus();
+      }
+
+      for (const [index, tab] of tabs.entries()) {
+        tab.addEventListener('click', () => activateTab(tab));
+        tab.addEventListener('keydown', (event) => {
+          let nextIndex;
+          if (event.key === 'ArrowRight') nextIndex = (index + 1) % tabs.length;
+          else if (event.key === 'ArrowLeft') nextIndex = (index - 1 + tabs.length) % tabs.length;
+          else if (event.key === 'Home') nextIndex = 0;
+          else if (event.key === 'End') nextIndex = tabs.length - 1;
+          else return;
+          event.preventDefault();
+          activateTab(tabs[nextIndex], true);
+        });
+      }
+    })();
+  </script>
+</body>
+</html>

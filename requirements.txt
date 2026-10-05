@@ -1,0 +1,6 @@
+fastmcp==4.0.10
+fastapi==0.141.1
+uvicorn==0.54.0
+pydantic-ai-slim[mcp,openai]==2.54.0
+python-dotenv==1.2.4
+openai==3.24.0

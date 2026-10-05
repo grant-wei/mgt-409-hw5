@@ -1,0 +1,703 @@
+{
+  "schema_version": 1,
+  "generated_from": {
+    "audit_trail": "output/audit_trail.json",
+    "approval_ledger": "output/approval_requests.sqlite3",
+    "final_facts": "MCP read-only verification through the active homework backend",
+    "dashboard_screenshots": "real React dashboard at http://localhost:5174, no demo mode"
+  },
+  "reset_evidence": {
+    "status": "inconclusive",
+    "audit_event_count": 366,
+    "reset_event_count": 0,
+    "note": "The audit history contains no explicit database reset event for the three-ticket sequence. A $3,400 checking balance is present in the early Ticket 101 agent/MCP facts, but that does not prove a reset occurred."
+  },
+  "cash_reconciliation": {
+    "starting_checking": 3400.0,
+    "invoice_501_payment": 840.0,
+    "rent_payment_lease_1": 2400.0,
+    "expected_ending": 160.0,
+    "mcp_verified_ending": 160.0,
+    "formula": "$3,400 - $840 - $2,400 = $160",
+    "mcp_snapshot": {
+      "accounts": [
+        {
+          "name": "checking",
+          "balance": 160.0,
+          "date": "2026-08-31"
+        }
+      ],
+      "payments_by_account": [
+        {
+          "account": "checking",
+          "total_paid": 3240.0,
+          "count": 2
+        }
+      ]
+    },
+    "verified": true
+  },
+  "tickets": [
+    {
+      "ticket_id": 101,
+      "final_status": "resolved",
+      "outcome": "Simulated fulfillment. One tee was recorded as a human-provided simulation receipt, then stock was adjusted to zero under exact human approval. No actual customer handoff is established.",
+      "agent_run": {
+        "run_id": "32644692-4fc7-4376-8b8f-6e5f925d77f8",
+        "timestamp": "2026-10-04T23:46:12.385595+00:00",
+        "status": "failed",
+        "error_type": "RuntimeError",
+        "error_code": "AGENT_EXECUTION_FAILED",
+        "source_location": "team.py:_run_agent:250",
+        "usage_totals": {
+          "requests": 8,
+          "tool_calls": 6,
+          "input_tokens": 9882,
+          "output_tokens": 671
+        }
+      },
+      "actual_agent_contributions": [
+        {
+          "agent": "inventory",
+          "result_status": "validated AgentReply",
+          "timestamp": "2026-10-04T23:46:04.136892+00:00",
+          "summary": "Verified ticket 101 and its linked invoice facts, plus stock for the requested item. No stock is available; no vendor lead-time or supplier/quote facts were supplied, so restocking cannot be promised or proposed from this evidence.",
+          "facts": [
+            "Ticket 101 requests 1 × CC-TEE-WHITE, size S; ticket is open.",
+            "Linked invoice 501 is open for $840, due 2026-08-28, vendor listed as Bulldog Print Co. Its unpaid status means that vendor will not ship.",
+            "Inventory snapshot: CC-TEE-WHITE (Classic Bulldog Tee), size S, quantity on hand 0; listed unit cost $8.00 and list price $28.00.",
+            "Requested quantity: 1; available: 0; shortage: 1.",
+            "No recorded vendor lead time, supplier relationship, or supplier quote was verified."
+          ],
+          "proposed_updates": [],
+          "pending_actions": [],
+          "actual_usage": {
+            "agent": "inventory",
+            "requests": 3,
+            "tool_calls": 2,
+            "input_tokens": 3629,
+            "output_tokens": 278,
+            "details": {
+              "reasoning_tokens": 0
+            }
+          }
+        },
+        {
+          "agent": "accounting",
+          "result_status": "validated AgentReply",
+          "timestamp": "2026-10-04T23:46:12.358977+00:00",
+          "summary": "Invoice 501 is an open recorded obligation for $840, due 2026-08-28. Against desk date 2026-08-31, it is 3 days overdue. Checking has $3,400, so paying $840 would leave $2,560; sufficient cash is recorded. No payment was made (read-only).",
+          "facts": [
+            "Vendor: Bulldog Print Co.",
+            "Invoice status: open",
+            "Amount: $840",
+            "Due date: 2026-08-28; desk date: 2026-08-31",
+            "Checking balance: $3,400; post-payment balance would be $2,560"
+          ],
+          "proposed_updates": [],
+          "pending_actions": [
+            {
+              "tool_name": "record_invoice_payment",
+              "arguments": {
+                "invoice_id": 501,
+                "account": "checking",
+                "amount": 840,
+                "approved_by": "human approval desk",
+                "approval_reference": "pending human approval"
+              },
+              "reason": "Invoice 501 is recorded open for $840, due 2026-08-28 and overdue as of 2026-08-31. Checking balance is $3,400, sufficient to cover it."
+            }
+          ],
+          "actual_usage": {
+            "agent": "accounting",
+            "requests": 3,
+            "tool_calls": 2,
+            "input_tokens": 3582,
+            "output_tokens": 274,
+            "details": {
+              "reasoning_tokens": 0
+            }
+          }
+        }
+      ],
+      "noncompleted_agents": [
+        {
+          "agent": "boss",
+          "status": "failed before a validated AgentReply",
+          "error_code": "AGENT_EXECUTION_FAILED",
+          "source_location": "team.py:_run_agent:250"
+        },
+        {
+          "agent": "customer_service",
+          "status": "not reached in this run"
+        }
+      ],
+      "human_approvals": [
+        {
+          "request_id": "89b5d769-9dce-4aaf-a1ef-03516d509432",
+          "run_id": "32644692-4fc7-4376-8b8f-6e5f925d77f8",
+          "tool_name": "record_invoice_payment",
+          "arguments": {
+            "account": "checking",
+            "amount": 840,
+            "invoice_id": 501
+          },
+          "reason": "Invoice 501 is recorded open for $840, due 2026-08-28 and overdue as of 2026-08-31. Checking balance is $3,400, sufficient to cover it.",
+          "status": "executed",
+          "approved_by": "G",
+          "approval_reference": "human-approval:89b5d769-9dce-4aaf-a1ef-03516d509432",
+          "result": {
+            "verification": {
+              "balance_verified": true,
+              "checking_balance": 2560.0,
+              "record": {
+                "amount": 840.0,
+                "description": "Rush reprint CC-TEE-WHITE S",
+                "due_date": "2026-08-28",
+                "id": 501,
+                "status": "paid",
+                "vendor_id": 1,
+                "vendor_lead_days": 5,
+                "vendor_name": "Bulldog Print Co",
+                "vendor_specialty": "apparel reprint"
+              },
+              "record_verified": true,
+              "verified": true
+            },
+            "write": {
+              "account": "checking",
+              "amount": 840.0,
+              "approval_reference": "human-approval:89b5d769-9dce-4aaf-a1ef-03516d509432",
+              "approved_by": "G",
+              "invoice_id": 501,
+              "new_balance": 2560.0,
+              "updated": true
+            }
+          }
+        },
+        {
+          "run_id": "5ac1358c-0baf-47e4-a944-d6acf96576aa",
+          "timestamp": "2026-10-05T17:35:05.588133+00:00",
+          "step": "simulated_tee_receipt_recorded",
+          "tool": "record_inventory_receipt",
+          "arguments": {
+            "sku": "CC-TEE-WHITE",
+            "size": "S",
+            "received_quantity": 1,
+            "receipt_date": "2026-09-07",
+            "source_label": "human-provided simulation input, not verified supplier evidence",
+            "receipt_reference": "SIM-CC-TEE-WHITE-S-2026-09-07-01",
+            "approved_by": "G",
+            "approval_reference": "human-approval:ticket101-tee-receipt-SIM-CC-TEE-WHITE-S-2026-09-07-01"
+          },
+          "result": {
+            "updated": true,
+            "sku": "CC-TEE-WHITE",
+            "size": "S",
+            "received_quantity": 1,
+            "receipt_date": "2026-09-07",
+            "previous_stock": 0,
+            "resulting_stock": 1,
+            "source_label": "human-provided simulation input, not verified supplier evidence",
+            "receipt_reference": "SIM-CC-TEE-WHITE-S-2026-09-07-01",
+            "approved_by": "G",
+            "approval_reference": "human-approval:ticket101-tee-receipt-SIM-CC-TEE-WHITE-S-2026-09-07-01"
+          },
+          "scope": null,
+          "outcome_label": "simulated fulfillment, not actual customer handoff"
+        },
+        {
+          "run_id": "5ac1358c-0baf-47e4-a944-d6acf96576aa",
+          "timestamp": "2026-10-05T17:35:09.216978+00:00",
+          "step": "simulated_fulfillment_stock_adjustment_recorded",
+          "tool": "set_inventory_quantity",
+          "arguments": {
+            "sku": "CC-TEE-WHITE",
+            "size": "S",
+            "quantity": 0,
+            "reason": "Simulated fulfillment of Ticket 101 after the one-unit simulated receipt dated 2026-09-07. No actual customer handoff is claimed.",
+            "approved_by": "G",
+            "approval_reference": "human-approval:ticket101-tee-fulfillment-stock-adjustment-2026-09-07"
+          },
+          "result": {
+            "updated": true,
+            "sku": "CC-TEE-WHITE",
+            "size": "S",
+            "previous_quantity": 1,
+            "quantity": 0,
+            "reason": "Simulated fulfillment of Ticket 101 after the one-unit simulated receipt dated 2026-09-07. No actual customer handoff is claimed.",
+            "approved_by": "G",
+            "approval_reference": "human-approval:ticket101-tee-fulfillment-stock-adjustment-2026-09-07"
+          },
+          "scope": null,
+          "outcome_label": "simulated fulfillment, not actual customer handoff"
+        },
+        {
+          "run_id": "5ac1358c-0baf-47e4-a944-d6acf96576aa",
+          "timestamp": "2026-10-05T17:35:13.103300+00:00",
+          "step": "ticket101_simulated_fulfillment_resolution_recorded",
+          "tool": "update_ticket_status",
+          "arguments": {
+            "ticket_id": 101,
+            "status": "resolved",
+            "approved_by": "G",
+            "approval_reference": "human-approval:ticket101-simulated-fulfillment-2026-09-07"
+          },
+          "result": {
+            "updated": true,
+            "ticket_id": 101,
+            "previous_status": "open",
+            "status": "resolved",
+            "approved_by": "G",
+            "approval_reference": "human-approval:ticket101-simulated-fulfillment-2026-09-07"
+          },
+          "scope": null,
+          "outcome_label": "simulated fulfillment, not actual customer handoff"
+        }
+      ],
+      "verified_mcp": {
+        "ticket": {
+          "id": 101,
+          "type": "customer_order",
+          "requester": "Tauhid Zaman",
+          "subject": "Bulldog tee",
+          "sku": "CC-TEE-WHITE",
+          "size": "S",
+          "qty": 1,
+          "lease_id": null,
+          "invoice_id": 501,
+          "status": "resolved",
+          "notes": "Needs a tee in size S.",
+          "created_at": "2026-08-31T09:15:00-04:00",
+          "invoice_status": "paid",
+          "invoice_amount": 840.0,
+          "invoice_due": "2026-08-28",
+          "invoice_vendor": "Bulldog Print Co",
+          "space_name": null,
+          "landlord": null,
+          "monthly_rent": null,
+          "rent_due": null
+        },
+        "invoice": {
+          "id": 501,
+          "vendor_id": 1,
+          "vendor_name": "Bulldog Print Co",
+          "vendor_specialty": "apparel reprint",
+          "vendor_lead_days": 5,
+          "amount": 840.0,
+          "due_date": "2026-08-28",
+          "status": "paid",
+          "description": "Rush reprint CC-TEE-WHITE S"
+        },
+        "invoice_payment": {
+          "id": 1,
+          "kind": "invoice",
+          "ref_id": 501,
+          "amount": 840.0,
+          "account": "checking",
+          "paid_at": "2026-08-31",
+          "approved_by": "G"
+        },
+        "receipt": {
+          "sku": "CC-TEE-WHITE",
+          "size": "S",
+          "received_quantity": 1,
+          "receipt_date": "2026-09-07",
+          "previous_stock": 0,
+          "resulting_stock": 1,
+          "source_label": "human-provided simulation input, not verified supplier evidence",
+          "receipt_reference": "SIM-CC-TEE-WHITE-S-2026-09-07-01",
+          "approved_by": "G",
+          "approval_reference": "human-approval:ticket101-tee-receipt-SIM-CC-TEE-WHITE-S-2026-09-07-01"
+        },
+        "final_product": {
+          "sku": "CC-TEE-WHITE",
+          "name": "Classic Bulldog Tee",
+          "size": "S",
+          "qty": 0,
+          "location": "Aisle B",
+          "unit_cost": 8.0,
+          "list_price": 28.0
+        },
+        "stock_transitions": [
+          0,
+          1,
+          0
+        ]
+      },
+      "dashboard_screenshot": "screenshots/ticket_101.jpg"
+    },
+    {
+      "ticket_id": 102,
+      "final_status": "resolved",
+      "outcome": "Paid rent. The $2,400 rent notice obligation was paid from checking, then the ticket was resolved with separate human status approval. No landlord contact is claimed.",
+      "agent_run": {
+        "run_id": "4e0628a8-9d0b-4a24-bbad-e3ce9ac27f41",
+        "timestamp": "2026-10-05T03:51:26.592526+00:00",
+        "status": "failed",
+        "error_type": "UsageLimitExceeded",
+        "error_code": "AGENT_INPUT_OR_USAGE_LIMIT_EXCEEDED",
+        "source_location": "usage.py:check_before_request:553",
+        "usage_totals": {
+          "requests": 6,
+          "tool_calls": 5,
+          "input_tokens": 7509,
+          "output_tokens": 653
+        }
+      },
+      "actual_agent_contributions": [
+        {
+          "agent": "accounting",
+          "result_status": "validated AgentReply",
+          "timestamp": "2026-10-05T03:51:26.223734+00:00",
+          "summary": "Read-only rent review for ticket 102. Checking has $2,560 as of 2026-08-31, so the proposed $2,400 payment would leave $160; it does not make cash negative. No prior rent-payment records were found for lease 1. The supplied facts say next due 2026-09-02, which is after the shop operating date (2026-08-31), so this is not overdue as of the operating date. No discrepancy found among supplied lease facts; payment remains subject to human approval.",
+          "facts": [
+            "Lease 1: Chapel Street shop; landlord Elm City Properties; monthly rent $2,400; next due 2026-09-02 (verified facts supplied by colleague/user).",
+            "Shop operating date: 2026-08-31.",
+            "Checking balance: $2,560 as of 2026-08-31.",
+            "Rent-payment lookup for lease 1 returned no recorded payments.",
+            "Proposed payment leaves $160 checking balance."
+          ],
+          "proposed_updates": [],
+          "pending_actions": [
+            {
+              "tool_name": "record_rent_payment",
+              "arguments": {
+                "lease_id": 1,
+                "account": "checking",
+                "amount": 2400,
+                "approved_by": "Human approver",
+                "approval_reference": "Pending human approval"
+              },
+              "reason": "Human review requested for the exact $2,400 checking rent payment for lease 1 (Chapel Street shop, Elm City Properties), due 2026-09-02. Checking balance is $2,560 as of 2026-08-31 and no prior rent payments are recorded; payment would leave $160. Do not execute without approval for these exact arguments."
+            }
+          ],
+          "actual_usage": {
+            "agent": "accounting",
+            "requests": 2,
+            "tool_calls": 2,
+            "input_tokens": 2491,
+            "output_tokens": 402,
+            "details": {
+              "reasoning_tokens": 0
+            }
+          }
+        }
+      ],
+      "noncompleted_agents": [
+        {
+          "agent": "facilities",
+          "status": "delegated and made MCP reads, but failed before a validated AgentReply",
+          "error_code": "AGENT_INPUT_OR_USAGE_LIMIT_EXCEEDED",
+          "actual_usage": {
+            "agent": "facilities",
+            "requests": 3,
+            "tool_calls": 3,
+            "input_tokens": 3833,
+            "output_tokens": 155,
+            "details": {
+              "reasoning_tokens": 0
+            }
+          }
+        },
+        {
+          "agent": "boss",
+          "status": "failed before a validated AgentReply",
+          "error_code": "AGENT_INPUT_OR_USAGE_LIMIT_EXCEEDED"
+        }
+      ],
+      "human_approvals": [
+        {
+          "request_id": "43e294f2-9f0c-48d6-ab2a-b5b30668a3a6",
+          "run_id": "4e0628a8-9d0b-4a24-bbad-e3ce9ac27f41",
+          "tool_name": "record_rent_payment",
+          "arguments": {
+            "account": "checking",
+            "amount": 2400,
+            "lease_id": 1
+          },
+          "reason": "Human review requested for the exact $2,400 checking rent payment for lease 1 (Chapel Street shop, Elm City Properties), due 2026-09-02. Checking balance is $2,560 as of 2026-08-31 and no prior rent payments are recorded; payment would leave $160. Do not execute without approval for these exact arguments.",
+          "status": "executed",
+          "approved_by": "G",
+          "approval_reference": "human-approval:43e294f2-9f0c-48d6-ab2a-b5b30668a3a6",
+          "result": {
+            "verification": {
+              "balance_verified": true,
+              "checking_balance": 160.0,
+              "record": {
+                "account": "checking",
+                "amount": 2400.0,
+                "approval_reference": "human-approval:43e294f2-9f0c-48d6-ab2a-b5b30668a3a6",
+                "approved_by": "G",
+                "due_date": "2026-09-02",
+                "id": 1,
+                "lease_id": 1,
+                "paid_at": "2026-08-31"
+              },
+              "record_verified": true,
+              "verified": true
+            },
+            "write": {
+              "account": "checking",
+              "amount": 2400.0,
+              "approval_reference": "human-approval:43e294f2-9f0c-48d6-ab2a-b5b30668a3a6",
+              "approved_by": "G",
+              "due_date": "2026-09-02",
+              "lease_id": 1,
+              "new_balance": 160.0,
+              "paid_at": "2026-08-31",
+              "rent_payment_id": 1,
+              "updated": true
+            }
+          }
+        },
+        {
+          "run_id": "2ddc33d7-116a-4c41-9ce2-a6ee6185488b",
+          "timestamp": "2026-10-05T13:49:05.158107+00:00",
+          "step": "human_approved_ticket_status",
+          "tool": "update_ticket_status",
+          "arguments": null,
+          "result": {
+            "updated": true,
+            "ticket_id": 102,
+            "previous_status": "open",
+            "status": "resolved",
+            "approved_by": "G",
+            "approval_reference": "human-approval:problem9-final-ticket-102"
+          },
+          "scope": "User-approved ticket status only",
+          "outcome_label": null
+        }
+      ],
+      "verified_mcp": {
+        "ticket": {
+          "id": 102,
+          "type": "rent_notice",
+          "requester": "Elm City Properties",
+          "subject": "Rent due",
+          "sku": null,
+          "size": null,
+          "qty": null,
+          "lease_id": 1,
+          "invoice_id": null,
+          "status": "resolved",
+          "notes": "Email: shop rent due in 2 days.",
+          "created_at": "2026-08-31T11:05:00-04:00",
+          "invoice_status": null,
+          "invoice_amount": null,
+          "invoice_due": null,
+          "invoice_vendor": null,
+          "space_name": "Chapel Street shop",
+          "landlord": "Elm City Properties",
+          "monthly_rent": 2400.0,
+          "rent_due": "2026-09-02"
+        },
+        "rent_payment": {
+          "id": 1,
+          "lease_id": 1,
+          "due_date": "2026-09-02",
+          "amount": 2400.0,
+          "account": "checking",
+          "paid_at": "2026-08-31",
+          "approved_by": "G",
+          "approval_reference": "human-approval:43e294f2-9f0c-48d6-ab2a-b5b30668a3a6"
+        },
+        "checking_balance": 160.0
+      },
+      "dashboard_screenshot": "screenshots/ticket_102.jpg"
+    },
+    {
+      "ticket_id": 103,
+      "final_status": "resolved",
+      "outcome": "Price review only. The human approved the 10% recommended price and existing board draft for this review request. This records no customer acceptance, sale, or fulfillment of 20 hoodies.",
+      "agent_run": {
+        "run_id": "78216031-bb8b-4d9c-be16-ad65855fb42c",
+        "timestamp": "2026-10-05T13:26:38.229113+00:00",
+        "status": "completed",
+        "completion_reason": "AgentReply validated",
+        "usage_totals": {
+          "requests": 9,
+          "tool_calls": 6,
+          "input_tokens": 12878,
+          "output_tokens": 1343
+        }
+      },
+      "actual_agent_contributions": [
+        {
+          "agent": "inventory",
+          "result_status": "validated AgentReply",
+          "timestamp": "2026-10-05T13:26:19.163227+00:00",
+          "summary": "Verified stock for Ticket 103: 8 CC-HOOD-NAVY hoodies, size M, are on hand (Aisle A), against the requested 20; shortage is 12. No supplier or delivery commitment can be verified from the available facts.",
+          "facts": [
+            "SKU: CC-HOOD-NAVY; size M.",
+            "On-hand quantity: 8; requested quantity: 20; shortage: 12.",
+            "Recorded unit cost: $22.00; list price: $58.00.",
+            "No supplier quote, supplier relationship, or delivery date was verified. Vendor lookup for ID 0 returned no record."
+          ],
+          "proposed_updates": [],
+          "pending_actions": [],
+          "actual_usage": {
+            "agent": "inventory",
+            "requests": 3,
+            "tool_calls": 3,
+            "input_tokens": 3810,
+            "output_tokens": 263,
+            "details": {
+              "reasoning_tokens": 0
+            }
+          }
+        },
+        {
+          "agent": "accounting",
+          "result_status": "validated AgentReply",
+          "timestamp": "2026-10-05T13:26:27.994581+00:00",
+          "summary": "Using Inventory’s verified facts, recommend a 10% bulk discount on the 20 requested hoodies. At $58 list price, discounted price is $52.20 each and customer total is $1,044. Against the internal recorded unit cost of $22 (not a supplier quote), unit gross margin is $30.20, or about 57.9% of discounted selling price; total gross margin is $604 before other expenses. No supplier quote or delivery is verified, so no purchase or payment action is supportable. No pending financial action.",
+          "facts": [
+            "CC-HOOD-NAVY, size M: list price $58; internal recorded unit cost $22, explicitly not a supplier quote.",
+            "Requested quantity 20; 8 on hand, leaving a shortage of 12.",
+            "At a recommended 10% discount: $52.20 per unit; $1,044 total revenue if all 20 are sold.",
+            "Indicative gross margin using internal recorded cost: $30.20 per unit (57.9%); $604 for 20 units, before other expenses.",
+            "No supplier quote or delivery verified; no exact valid financial action can be submitted."
+          ],
+          "proposed_updates": [],
+          "pending_actions": [],
+          "actual_usage": {
+            "agent": "accounting",
+            "requests": 1,
+            "tool_calls": 0,
+            "input_tokens": 1186,
+            "output_tokens": 289,
+            "details": {
+              "reasoning_tokens": 0
+            }
+          }
+        },
+        {
+          "agent": "customer_service",
+          "result_status": "validated AgentReply",
+          "timestamp": "2026-10-05T13:26:34.363430+00:00",
+          "summary": "Customer-facing draft based on the supplied verified inventory and accounting facts; no external message has been sent.",
+          "facts": [
+            "8 CC-HOOD-NAVY size M are on hand against a request for 20, leaving 12 not currently available.",
+            "Accounting recommends a 10% discount, which would make the price $52.20 each and $1,044 for 20."
+          ],
+          "proposed_updates": [
+            "Thanks for your interest in 20 CC-HOOD-NAVY hoodies in size M. We currently have 8 on hand, so 12 are not currently available. If you’re interested in proceeding with 20, a 10% discount has been recommended, which would bring the price to $52.20 each ($1,044 total). Please let us know how you’d like to proceed."
+          ],
+          "pending_actions": [],
+          "actual_usage": {
+            "agent": "customer_service",
+            "requests": 1,
+            "tool_calls": 0,
+            "input_tokens": 1145,
+            "output_tokens": 185,
+            "details": {
+              "reasoning_tokens": 0
+            }
+          }
+        },
+        {
+          "agent": "boss",
+          "result_status": "validated AgentReply",
+          "timestamp": "2026-10-05T13:26:38.221998+00:00",
+          "summary": "Ticket 103 read-only workflow complete: inventory, discount/margin analysis, and a grounded customer draft are provided. No writes were made. No valid pending financial actions were proposed. The 12-unit shortage remains unverified for supplier availability or delivery; do not promise restocking.",
+          "facts": [
+            "CC-HOOD-NAVY, size M: 8 on hand against 20 requested; shortage is 12.",
+            "Recorded list price is $58 per unit. Internal recorded cost is $22 per unit; it is not a supplier quote.",
+            "Accounting recommends a 10% discount: $52.20 per unit, $1,044 for 20; indicative gross margin using internal recorded cost is $30.20 per unit (about 57.9%) and $604 total before other expenses.",
+            "No supplier quote, vendor relationship, or delivery date was verified.",
+            "No MCP writes, customer communications, or ticket status changes were made."
+          ],
+          "proposed_updates": [
+            "Thanks for your interest in 20 CC-HOOD-NAVY hoodies in size M. We currently have 8 on hand, so 12 are not currently available. If you’re interested in proceeding with 20, a 10% discount has been recommended, which would bring the price to $52.20 each ($1,044 total). Please let us know how you’d like to proceed."
+          ],
+          "pending_actions": [],
+          "actual_usage": {
+            "agent": "boss",
+            "requests": 4,
+            "tool_calls": 3,
+            "input_tokens": 6737,
+            "output_tokens": 606,
+            "details": {
+              "reasoning_tokens": 0
+            }
+          }
+        }
+      ],
+      "human_approvals": [
+        {
+          "action": "approve the 10% recommended price and existing board draft for price review only",
+          "approved_by": "user",
+          "evidence": "explicit user instruction in this conversation",
+          "customer_acceptance": false,
+          "sale_or_fulfillment_approved": false
+        },
+        {
+          "run_id": "2ddc33d7-116a-4c41-9ce2-a6ee6185488b",
+          "timestamp": "2026-10-05T13:49:06.297737+00:00",
+          "step": "human_approved_ticket_status",
+          "tool": "update_ticket_status",
+          "result": {
+            "updated": true,
+            "ticket_id": 103,
+            "previous_status": "open",
+            "status": "resolved",
+            "approved_by": "G",
+            "approval_reference": "human-approval:problem9-final-ticket-103"
+          },
+          "scope": "User-approved ticket status only"
+        }
+      ],
+      "verified_mcp": {
+        "ticket": {
+          "id": 103,
+          "type": "price_override",
+          "requester": "Yale AI Club",
+          "subject": "Bulk hoodie discount",
+          "sku": "CC-HOOD-NAVY",
+          "size": "M",
+          "qty": 20,
+          "lease_id": null,
+          "invoice_id": null,
+          "status": "resolved",
+          "notes": "Student org wants 20 hoodies, size M, asking for a bulk discount.",
+          "created_at": "2026-08-31T16:55:00-04:00",
+          "invoice_status": null,
+          "invoice_amount": null,
+          "invoice_due": null,
+          "invoice_vendor": null,
+          "space_name": null,
+          "landlord": null,
+          "monthly_rent": null,
+          "rent_due": null
+        },
+        "checking_balance": 160.0,
+        "separate_hoodie_simulation": {
+          "receipt": {
+            "sku": "CC-HOOD-NAVY",
+            "size": "M",
+            "received_quantity": 12,
+            "receipt_date": "2026-09-07",
+            "previous_stock": 8,
+            "resulting_stock": 20,
+            "source_label": "human-provided simulation input, not verified supplier evidence",
+            "receipt_reference": "SIM-CC-HOOD-NAVY-M-2026-09-07-12",
+            "approved_by": "G",
+            "approval_reference": "human-approval:hoodie-receipt-SIM-CC-HOOD-NAVY-M-2026-09-07-12"
+          },
+          "current_product": {
+            "sku": "CC-HOOD-NAVY",
+            "name": "Basic Hoodie Big Yale",
+            "size": "M",
+            "qty": 20,
+            "location": "Aisle A",
+            "unit_cost": 22.0,
+            "list_price": 58.0
+          },
+          "note": "Separate human-provided simulation input, not verified supplier evidence, not tied to Ticket 103 fulfillment."
+        }
+      },
+      "dashboard_screenshot": "screenshots/ticket_103.jpg"
+    }
+  ]
+}
